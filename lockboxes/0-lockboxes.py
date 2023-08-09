@@ -5,22 +5,19 @@ method that determines if all the boxes can be opened.
 
 
 def canUnlockAll(boxes):
-    # Initialize a list to keep track of the visited boxes
-    visited = [False] * len(boxes)
+    # Set to keep track of visited boxes
+    visited = set()
+    visited.add(0)  # Start with the first box (0th index)
 
-    # The first box (box 0) is unlocked initially
-    visited[0] = True
+    # Queue to keep track of boxes to be explored
+    queue = [0]
 
-    # Initialize a stack for DFS
-    stack = [0]
-
-    # Perform DFS
-    while stack:
-        current_box = stack.pop()
+    while queue:
+        current_box = queue.pop(0)
         for key in boxes[current_box]:
-            if not visited[key]:
-                visited[key] = True
-                stack.append(key)
+            if key < len(boxes) and key not in visited:
+                visited.add(key)
+                queue.append(key)
 
     # Check if all boxes have been visited
-    return all(visited)
+    return len(visited) == len(boxes)
