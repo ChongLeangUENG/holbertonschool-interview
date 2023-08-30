@@ -1,91 +1,90 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_height - Measures the height of a binary tree
- * @tree: Pointer to the root node of the tree to measure
- *
- * Return: Height of the tree, or 0 if tree is NULL
+ * heap_size - Function that calculates the size of a heap
+ * @root: pointer to the root node of the Heap
+ * Return: heap size
  */
-size_t binary_tree_height(const binary_tree_t *tree)
+int heap_size(heap_t *root)
 {
-    size_t left_height, right_height;
+	int left, right;
 
-    if (tree == NULL)
-        return 0;
-
-    left_height = binary_tree_height(tree->left);
-    right_height = binary_tree_height(tree->right);
-
-    return (left_height > right_height ? left_height : right_height) + 1;
+	if (root == NULL)
+		return (0);
+	left = heap_size(root->left);
+	right = heap_size(root->right);
+	return (left + right + 1);
 }
 
 /**
- * binary_tree_is_perfect - Checks if a binary tree is perfect
- * @tree: Pointer to the root node of the tree to check
- *
- * Return: 1 if perfect, 0 otherwise
+ * insert_level_order - Function that inserts a node into a Max Binary Heap
+ * @root: Pointer to the root node of the Heap
+ * @idx: current index in heap
+ * @size: size of the heap
+ * @value: The value store in the node to be inserted
+ * Return: Pointer to the inserted node, or NULL on failure
  */
-int binary_tree_is_perfect(const binary_tree_t *tree)
+heap_t *insert_level_order(heap_t *root, int idx, int size, int value)
 {
-    int right_height, left_height;
+	heap_t *left, *right;
 
-    if (!tree)
-        return 0;
-
-    left_height = binary_tree_height(tree->left);
-    right_height = binary_tree_height(tree->right);
-
-    return left_height == right_height;
+	if (root == NULL)
+		return (NULL);
+	if (idx == size / 2)
+	{
+		if (root->left == NULL)
+		{
+			root->left = binary_tree_node(root, value);
+			return (root->left);
+		}
+		root->right = binary_tree_node(root, value);
+		return (root->right);
+	}
+	left = insert_level_order(root->left, (2 * idx), size, value);
+	right = insert_level_order(root->right, (2 * idx + 1), size, value);
+	if (left)
+		return (left);
+	return (right);
 }
 
 /**
- * heapify - Corrects the max heap ordering by swapping nodes if necessary
- * @node: Pointer to the node to start heapifying from
+ * swap - Function that swaps two integers
+ * @a: pointer to a int
+ * @b: pointer to another int
  */
-void heapify_up(heap_t *node)
+void swap(int *a, int *b)
 {
-    while (node->parent && node->n > node->parent->n)
-    {
-        int tmp = node->n;
-        node->n = node->parent->n;
-        node->parent->n = tmp;
-        node = node->parent;
-    }
+	int tmp = *a;
+
+	*a = *b;
+	*b = tmp;
 }
 
-
 /**
- * heap_insert - Inserts a value into a Max Binary Heap
+ * heap_insert - Function that inserts a value into a Max Binary Heap
  * @root: Double pointer to the root node of the Heap
- * @value: Value to store in the node to be inserted
- *
+ * @value: The value store in the node to be inserted
  * Return: Pointer to the inserted node, or NULL on failure
  */
 heap_t *heap_insert(heap_t **root, int value)
 {
-    heap_t *new_node;
+	heap_t *new_node;
+	int new_size;
 
-    new_node = binary_tree_node(NULL, value);
-    if (!new_node)
-        return NULL;
-
-    if (*root == NULL)
-    {
-        *root = new_node;
-        return new_node;
-    }
-
-    if ((*root)->left == NULL)
-        (*root)->left = new_node;
-    else if ((*root)->right == NULL)
-        (*root)->right = new_node;
-    else if (binary_tree_is_perfect(*root))
-        (*root)->left->left = new_node;
-    else
-        (*root)->left->right = new_node;
-
-    new_node->parent = *root;
-    heapify_up(new_node);
-
-    return new_node;
+	if (*root == NULL)
+	{
+		new_node = binary_tree_node(NULL, value);
+		*root = new_node;
+		return (new_node);
+	}
+	new_size = heap_size(*root) + 1;
+	new_node = insert_level_order(*root, 1, new_size, value);
+	for (; new_node->parent; new_node = new_node->parent)
+	{
+		if (new_node->parent->n < new_node->n)
+			swap(&new_node->parent->n, &new_node->n);
+		else
+			break;
+	}
+	return (new_node);
 }
