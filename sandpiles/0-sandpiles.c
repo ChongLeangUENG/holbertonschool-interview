@@ -43,10 +43,14 @@ void topple(int grid[3][3])
             if (copy[i][j] > 3)
             {
                 grid[i][j] -= 4;
-                if (i - 1 >= 0) grid[i - 1][j]++;
-                if (i + 1 < 3) grid[i + 1][j]++;
-                if (j - 1 >= 0) grid[i][j - 1]++;
-                if (j + 1 < 3) grid[i][j + 1]++;
+                if (i - 1 >= 0)
+                    grid[i - 1][j]++;
+                if (i + 1 < 3)
+                    grid[i + 1][j]++;
+                if (j - 1 >= 0)
+                    grid[i][j - 1]++;
+                if (j + 1 < 3)
+                    grid[i][j + 1]++;
             }
         }
     }
@@ -60,8 +64,7 @@ void topple(int grid[3][3])
 void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
     int i, j;
-    
-    // Sum grid1 and grid2 into grid1
+
     for (i = 0; i < 3; i++)
     {
         for (j = 0; j < 3; j++)
