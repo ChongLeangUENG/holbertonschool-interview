@@ -72,7 +72,7 @@ for (j = 0; j < 3; j++)
 {
 grid1[i][j] += grid2[i][j];
 }
-}	
+}
 
 while (!is_stable(grid1))
 {
