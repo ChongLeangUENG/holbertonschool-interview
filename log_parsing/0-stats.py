@@ -30,17 +30,17 @@ try:
 
         # Print statistics every 10 lines
         if line_count % 10 == 0:
-            print(status_code_counts":" total_file_size)
+            print("Total file size: {}".format(total_file_size))
             for code in sorted(status_code_counts.keys()):
                 if status_code_counts[code] > 0:
-                    print(code, ":", status_code_counts[code])
+                    print("{}: {}".format(code, status_code_counts[code]))
 
 except KeyboardInterrupt:
     # Handle keyboard interruption
     pass
 
 # Print final statistics
-print("Total file size:", total_file_size)
+print("Total file size: {}".format(total_file_size))
 for code in sorted(status_code_counts.keys()):
     if status_code_counts[code] > 0:
-        print(code, ":", status_code_counts[code])
+        print("{}: {}".format(code, status_code_counts[code]))
