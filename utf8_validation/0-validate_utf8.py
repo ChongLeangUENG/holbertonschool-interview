@@ -4,7 +4,6 @@ UTF validation
 """
 
 
-
 def validUTF8(data):
     """
     Determines if a given data set represents a valid UTF-8 encoding
@@ -29,12 +28,15 @@ def validUTF8(data):
             if n_bytes == 0:
                 continue
 
-            # Invalid scenarios: Either we have only one '1' (which would indicate a continuation byte)
-            # or more than 4 '1's (indicating a character more than 4 bytes long which is invalid in UTF-8)
+            #Invalid scenarios: Either we have only one '1' 
+            # (which would indicate a continuation byte)
+            #or more than 4 '1's (indicating a character more 
+            # than 4 bytes long which is invalid in UTF-8)
             if n_bytes == 1 or n_bytes > 4:
                 return False
         else:
-            # For continuation bytes, the most significant bit should be 1 and second most significant bit should be 0
+            # For continuation bytes, the most significant bit should be 1 
+            # and second most significant bit should be 0
             if not (num & mask1 and not (num & mask2)):
                 return False
 
