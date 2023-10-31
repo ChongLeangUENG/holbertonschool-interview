@@ -66,7 +66,7 @@ int slide_line(int *line, size_t size, int direction)
                     line[j] = 0;
                     j++;
                 }
-                if (j >= 0 && line[i] == line[j])
+                if (line[i] == line[j])
                 {
                     line[i] *= 2;
                     line[j] = 0;
