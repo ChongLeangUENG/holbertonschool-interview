@@ -53,7 +53,7 @@ int slide_line(int *line, size_t size, int direction)
             }
         }
     }
-    else  // direction == SLIDE_RIGHT
+    else
     {
         for (i = size - 1, j = size - 1; i > 0; i--)
         {
