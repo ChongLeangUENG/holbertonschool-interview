@@ -39,6 +39,19 @@ int slide_line(int *line, size_t size, int direction)
                 line[i + 1] = 0;
             }
         }
+
+        for (i = 0, j = 0; i < size; i++)
+        {
+            if (line[i] != 0)
+            {
+                if (j != i)
+                {
+                    line[j] = line[i];
+                    line[i] = 0;
+                }
+                j++;
+            }
+        }
     }
     else
     {
