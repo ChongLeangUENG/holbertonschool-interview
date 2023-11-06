@@ -28,7 +28,7 @@ void menger(int level)
     if (level < 0)
         return;
 
-    size = pow(3, level); // Calculate the size of the Menger Sponge
+    size = pow(3, level);
 
     for (row = 0; row < size; row++)
     {
