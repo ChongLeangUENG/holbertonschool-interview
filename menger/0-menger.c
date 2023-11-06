@@ -8,13 +8,13 @@
  */
 int is_filled(int row, int col)
 {
-    while (row > 0 || col > 0)
-    {
-        if (row % 3 == 1 && col % 3 == 1)
-            return 0;
-        row /= 3, col /= 3;
-    }
-    return 1;
+while (row > 0 || col > 0)
+{
+if (row % 3 == 1 && col % 3 == 1)
+return 0;
+row /= 3, col /= 3;
+}
+return 1;
 }
 
 /**
@@ -23,22 +23,22 @@ int is_filled(int row, int col)
  */
 void menger(int level)
 {
-    int size, row, col;
+int size, row, col;
 
-    if (level < 0)
-        return;
+if (level < 0)
+return;
 
-    size = pow(3, level);
+size = pow(3, level);
 
-    for (row = 0; row < size; row++)
-    {
-        for (col = 0; col < size; col++)
-        {
-            if (is_filled(row, col))
-                putchar('#');
-            else
-                putchar(' ');
-        }
-        putchar('\n');
-    }
+for (row = 0; row < size; row++)
+{
+for (col = 0; col < size; col++)
+{
+if (is_filled(row, col))
+putchar('#');
+else
+putchar(' ');
+}
+putchar('\n');
+}
 }
