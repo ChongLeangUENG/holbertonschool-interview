@@ -18,7 +18,7 @@ def print_solution(board):
     for row in range(n):
         solution.append([row, board[row]])
     print(solution)
-    
+
 
 def solve_nqueens(n):
     if n < 4:
