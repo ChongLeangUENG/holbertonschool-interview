@@ -13,11 +13,14 @@ static avl_t *array_to_avl(int *array, int start, int end, avl_t *parent);
  */
 static avl_t *array_to_avl(int *array, int start, int end, avl_t *parent)
 {
+    int mid;
+    avl_t *node;
+
     if (start > end)
         return NULL;
 
-    int mid = (start + end) / 2;
-    avl_t *node = malloc(sizeof(avl_t));
+    mid = (start + end) / 2;
+    node = malloc(sizeof(avl_t));
     if (!node)
         return NULL;
 
