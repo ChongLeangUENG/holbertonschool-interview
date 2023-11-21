@@ -17,19 +17,19 @@ int mid;
 avl_t *node;
 
 if (start > end)
-return NULL;
+return (NULL);
 
 mid = (start + end) / 2;
 node = malloc(sizeof(avl_t));
 if (!node)
-return NULL;
+return (NULL);
 
 node->n = array[mid];
 node->parent = parent;
 node->left = array_to_avl(array, start, mid - 1, node);
 node->right = array_to_avl(array, mid + 1, end, node);
 
-return node;
+return (node);
 }
 
 /**
@@ -42,7 +42,7 @@ return node;
 avl_t *sorted_array_to_avl(int *array, size_t size)
 {
 if (!array || size == 0)
-return NULL;
+return (NULL);
 
-return array_to_avl(array, 0, size - 1, NULL);
+return (array_to_avl(array, 0, size - 1, NULL));
 }
