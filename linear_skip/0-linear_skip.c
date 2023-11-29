@@ -1,44 +1,42 @@
 #include "search.h"
-#include <math.h>
 
 /**
- * linear_skip - Searches for a value 
- * in a sorted skip list of integers.
- * @list: Pointer to the head of the skip list.
- * @value: The value to search for.
- * 
- * Return: Pointer to the first node where value is located, or NULL.
+ * linear_skip - searches for a value in a sorted skip list of integers
+ * @list: pointer to the head of the skip list
+ * @value: value to search for
+ * Return: pointer on the first node where value is located or NULL
  */
 skiplist_t *linear_skip(skiplist_t *list, int value)
 {
-    skiplist_t *express, *prev;
+	size_t i;
+	skiplist_t *node_pos, *node_min;
 
-    if (!list)
-        return (NULL);
-
-    express = list->express;
-    prev = list;
-    while (express && express->n < value)
-    {
-        printf("Value checked at index [%lu] = [%d]\n", express->index, express->n);
-        prev = express;
-        if (!express->express)
-            break;
-        express = express->express;
-    }
-
-    if (!express)
-        express = prev;
-    while (express->next && express->n < value)
-        express = express->next;
-
-    printf("Value found between indexes [%lu] and [%lu]\n", prev->index, express->index);
-
-    while (prev && prev->n < value)
-        prev = prev->next;
-
-    if (prev && prev->n == value)
-        return (prev);
-
-    return (NULL);
+	if (!list)
+		return (NULL);
+	node_pos = list, node_min = list;
+	while (node_pos && node_pos->next && (node_pos->n) < value)
+	{
+		node_min = node_pos;
+		if (node_pos->express)
+		{
+			node_pos = node_pos->express;
+			printf("Value checked at index [%lu] = [%d]\n", node_pos->index,
+					node_pos->n);
+		}
+		else
+			while (node_pos->next)
+				node_pos = node_pos->next;
+	}
+	printf("Value found between indexes [%lu] and [%lu]\n", node_min->index,
+			node_pos->index);
+	for (i = node_min->index; i <= (node_pos->index) && (node_min->n <= value);
+			i++, node_min = node_min->next)
+	{
+		printf("Value checked at index [%lu] = [%d]\n", i, node_min->n);
+		if (node_min && (node_min->n) == value)
+			return (node_min);
+	}
+	if (node_min)
+		printf("Value checked at index [%lu] = [%d]\n", i, node_min->n);
+	return (NULL);
 }
