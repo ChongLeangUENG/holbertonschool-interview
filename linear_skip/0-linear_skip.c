@@ -2,7 +2,8 @@
 #include <math.h>
 
 /**
- * linear_skip - Searches for a value in a sorted skip list of integers.
+ * linear_skip - Searches for a value 
+ * in a sorted skip list of integers.
  * @list: Pointer to the head of the skip list.
  * @value: The value to search for.
  * 
