@@ -1,43 +1,44 @@
 #!/usr/bin/node
+const request = require('request');
+const args = process.argv;
 
-const fetch = require('node-fetch');
-
-const getStarWarsCharacters = async (movieId) => {
-  try {
-    // Base URL for the Star Wars API
-    const baseUrl = 'https://swapi.dev/api';
-
-    // Fetch film data
-    const filmResponse = await fetch(`${baseUrl}/films/${movieId}/`);
-
-    if (!filmResponse.ok) {
-      throw new Error('Error fetching film data');
-    }
-
-    const filmData = await filmResponse.json();
-
-    // Fetch and print each character's name
-    for (const characterUrl of filmData.characters) {
-      const characterResponse = await fetch(characterUrl);
-
-      if (!characterResponse.ok) {
-        console.error('Error fetching character data');
-        continue;
+const getChar = () => {
+  return new Promise((resolve, reject) => {
+    request(`https://swapi-api.hbtn.io/api/films/${args[2]}`, (error, response, body) => {
+      if (error) {
+        reject(error);
+      } else {
+        const data = JSON.parse(body);
+        resolve(data.characters);
       }
+    });
+  });
+};
 
-      const characterData = await characterResponse.json();
-      console.log(characterData.name);
+const getName = (url) => {
+  return new Promise((resolve, reject) => {
+    request(url, (error, response, body) => {
+      if (error) {
+        reject(error);
+      } else {
+        const data = JSON.parse(body);
+        console.log(data.name);
+        resolve(data.name);
+      }
+    });
+  });
+};
+
+const printNames = async () => {
+  try {
+    const arrName = await getChar();
+
+    for (const element of arrName) {
+      await getName(element);
     }
   } catch (error) {
-    console.error(error.message);
+    console.log(error);
   }
 };
 
-// Get movie ID from command line argument
-const movieId = process.argv[2];
-
-if (movieId) {
-  getStarWarsCharacters(movieId);
-} else {
-  console.log('Please provide a movie ID as a command line argument.');
-}
+printNames();
