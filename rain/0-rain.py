@@ -1,12 +1,14 @@
 #!/usr/bin/python3
 """ Module Rain """
 
+
 def rain(walls=[]):
     """
     Calculate the total amount of rainwater retained after it rains.
 
     Args:
-        walls (list): A list of non-negative integers representing the heights of walls.
+        walls (list): A list of non-negative integers 
+        representing the heights of walls.
 
     Returns:
         int: Total amount of water retained.
