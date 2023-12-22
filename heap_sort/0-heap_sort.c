@@ -34,7 +34,7 @@ if (array[to_swap] < array[child])
 to_swap = child;
 if (child + 1 <= end && array[to_swap] < array[child + 1])
 to_swap = child + 1;
-        
+
 if (to_swap == root)
 { /* If root holds max element */
 return;
@@ -43,7 +43,7 @@ else
 {
 swap(&array[root], &array[to_swap]);
 print_array(array, size);
-root = to_swap; /* Follow the node to keep heapifying */ 
+root = to_swap; /* Follow the node to keep heapifying */
 }
 }
 }
@@ -65,7 +65,7 @@ start--;
 }
 
 /**
- * heap_sort - Sorts an array of integers in ascending 
+ * heap_sort - Sorts an array of integers in ascending
  * order using the Heap sort algorithm
  * @array: array to sort
  * @size: size of the array
