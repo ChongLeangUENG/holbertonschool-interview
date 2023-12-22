@@ -12,7 +12,8 @@ void swap(int *a, int *b) {
 }
 
 /**
- * sift_down - Corrects a single violation of the heap property in a subtree's root
+ * sift_down - Corrects a single violation of the heap
+ *  property in a subtree's root
  * @array: array to sift down
  * @start: start index of the heap
  * @end: end index of the heap
@@ -23,7 +24,7 @@ void sift_down(int *array, size_t start, size_t end, size_t size) {
     size_t child;
     size_t to_swap;
 
-    while ((child = 2 * root + 1) <= end) { /* While the root has at least one child */
+    while ((child = 2 * root + 1) <= end) {
         to_swap = root; /* Keeps track of child to swap with */
 
         if (array[to_swap] < array[child])
@@ -56,20 +57,25 @@ void heapify(int *array, size_t size) {
 }
 
 /**
- * heap_sort - Sorts an array of integers in ascending order using the Heap sort algorithm
+ * heap_sort - Sorts an array of integers in ascending 
+ * order using the Heap sort algorithm
  * @array: array to sort
  * @size: size of the array
  */
 void heap_sort(int *array, size_t size) {
     size_t end;
 
-    heapify(array, size); /*  Build heap from array */
+    if (size < 2) {
+        return;
+    }
+
+    heapify(array, size);
 
     end = size - 1;
     while (end > 0) {
-        swap(&array[end], &array[0]); /* Swap max to the end of the array */
+        swap(&array[end], &array[0]);
         print_array(array, size);
         end--;
-        sift_down(array, 0, end, size); /* Heapify root element */
+        sift_down(array, 0, end, size);
     }
 }
