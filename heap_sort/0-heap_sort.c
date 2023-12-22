@@ -23,20 +23,20 @@ void sift_down(int *array, size_t start, size_t end, size_t size) {
     size_t child;
     size_t to_swap;
 
-    while ((child = 2 * root + 1) <= end) { // While the root has at least one child
-        to_swap = root; // Keeps track of child to swap with
+    while ((child = 2 * root + 1) <= end) { /* While the root has at least one child */
+        to_swap = root; /* Keeps track of child to swap with */
 
         if (array[to_swap] < array[child])
             to_swap = child;
         if (child + 1 <= end && array[to_swap] < array[child + 1])
             to_swap = child + 1;
         
-        if (to_swap == root) { // If root holds max element
+        if (to_swap == root) { /* If root holds max element */
             return;
         } else {
             swap(&array[root], &array[to_swap]);
             print_array(array, size);
-            root = to_swap; // Follow the node to keep heapifying
+            root = to_swap; /* Follow the node to keep heapifying */ 
         }
     }
 }
@@ -47,7 +47,7 @@ void sift_down(int *array, size_t start, size_t end, size_t size) {
  * @size: size of the array
  */
 void heapify(int *array, size_t size) {
-    ssize_t start = (size - 2) / 2; // Last parent node
+    ssize_t start = (size - 2) / 2; /*  Last parent node */
 
     while (start >= 0) {
         sift_down(array, start, size - 1, size);
@@ -63,13 +63,13 @@ void heapify(int *array, size_t size) {
 void heap_sort(int *array, size_t size) {
     size_t end;
 
-    heapify(array, size); // Build heap from array
+    heapify(array, size); /*  Build heap from array */
 
     end = size - 1;
     while (end > 0) {
-        swap(&array[end], &array[0]); // Swap max to the end of the array
+        swap(&array[end], &array[0]); /* Swap max to the end of the array */
         print_array(array, size);
         end--;
-        sift_down(array, 0, end, size); // Heapify root element
+        sift_down(array, 0, end, size); /* Heapify root element */
     }
 }
