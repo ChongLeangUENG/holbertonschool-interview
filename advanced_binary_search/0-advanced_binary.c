@@ -7,8 +7,9 @@
  */
 void print_array(int *array, size_t left, size_t right)
 {
+size_t i;
 printf("Searching in array: ");
-for (size_t i = left; i <= right; i++)
+for (i = left; i <= right; i++)
 {
 printf("%d", array[i]);
 if (i < right)
