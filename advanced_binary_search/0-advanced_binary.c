@@ -28,12 +28,13 @@ printf("\n");
  */
 int binary_search_rec(int *array, size_t left, size_t right, int value)
 {
+size_t mid;
 if (left > right)
 {
 return -1;
 }
 
-size_t mid = left + (right - left) / 2;
+mid = left + (right - left) / 2;
 print_array(array, left, right);
 
 if (array[mid] == value)
