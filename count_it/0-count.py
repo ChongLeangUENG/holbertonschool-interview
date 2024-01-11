@@ -1,9 +1,11 @@
 import requests
 import sys
 from collections import Counter
+"""Function count it"""
 
 
 def count_words(subreddit, word_list, after='', counter=None):
+    """Count word"""
     if counter is None:
         counter = Counter()
     headers = {'User-Agent': 'Keyword Counter Bot 0.1'}
