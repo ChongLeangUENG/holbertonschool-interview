@@ -11,7 +11,8 @@ def count_words(subreddit, word_list, after='', counter=None):
         counter = Counter()
     headers = {'User-Agent': 'Keyword Counter Bot 0.1'}
 
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=100&after={after}"
+    url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=100&after=\
+    {after}"
     response = requests.get(url, headers=headers)
 
     if response.status_code != 200:
