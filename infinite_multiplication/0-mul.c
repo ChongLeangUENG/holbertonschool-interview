@@ -28,23 +28,30 @@ return (1);
 
 int main(int argc, char *argv[])
 {
+long long num1, num2, result;
+
 if (argc != 3)
 {
 printf("Error\n");
-return 98;
+return (98);
 }
 
 if (!is_number(argv[1]) || !is_number(argv[2]))
 {
 printf("Error\n");
-return 98;
+return (98);
 }
 
-long long num1 = atoll(argv[1]);
-long long num2 = atoll(argv[2]);
-long long result = num1 * num2;
+num1 = atoll(argv[1]);
+num2 = atoll(argv[2]);
+if (num1 == 0 || num2 == 0)
+{
+printf("0\n");
+return (0);
+}
+result = num1 * num2;
 
 printf("%lld\n", result);
 
-return 0;
+return (0);
 }
