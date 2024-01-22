@@ -1,7 +1,7 @@
 #!/usr/bin/python3
+from collections import Counter
 import requests
 import sys
-from collections import Counter
 """Function count it"""
 
 
