@@ -28,7 +28,7 @@ return (1);
 
 int main(int argc, char *argv[])
 {
-long long num1, num2, result;
+size_t num1, num2, result;
 
 if (argc != 3)
 {
@@ -51,7 +51,7 @@ return (0);
 }
 result = num1 * num2;
 
-printf("%lld\n", result);
+printf("%zu\n", result);
 
 return (0);
 }
