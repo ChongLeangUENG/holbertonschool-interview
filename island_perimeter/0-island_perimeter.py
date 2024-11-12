@@ -4,7 +4,19 @@
 
 def island_perimeter(grid):
     """
-    function that returns the perimeter of the island described in grid:
+    Calculate the perimeter of an island in a grid.
+
+    Args:
+        grid (list of list of int): A rectangular grid where:
+            - 0 represents water,
+            - 1 represents land.
+            - Each cell is a square with side length 1.
+            - Cells are connected horizontally/vertically, not diagonally.
+            - The grid is completely surrounded by water, has only one island (or none),
+              and the island does not contain "lakes" (water completely surrounded by land).
+
+    Returns:
+        int: The perimeter of the island.
     """
     perimeter = 0
     rows = len(grid)
